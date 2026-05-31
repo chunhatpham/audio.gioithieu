@@ -1,0 +1,23 @@
+{
+  "name": "chunhatpham",
+  "short_name": "chunhatpham",
+  "description": "ChuNhatPham Audio - Trải nghiệm điện ảnh đỉnh cao",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f0900",
+  "theme_color": "#ff9f43",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/Cx6h9HYF/A292A3C8-125D-4BF9-B965-77F735C7DDC8.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://i.postimg.cc/Cx6h9HYF/A292A3C8-125D-4BF9-B965-77F735C7DDC8.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
