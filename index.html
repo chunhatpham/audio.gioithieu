@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>ChuNhatPham | ChuNhatPham Audio</title>
+    <meta name="description" content="Chào mừng bạn đến với thiên đường giải trí chunhatpham audio – nền tảng chuyên cung cấp phim truyện và truyện tranh Audio hàng đầu!">
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f0900">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/Cx6h9HYF/A292A3C8-125D-4BF9-B965-77F735C7DDC8.png">
+
+    <style>
+        /* MÀU SẮC & PHONG CÁCH */
+        :root {
+            --bg-color: #0f0900; 
+            --top-bar-bg: rgba(30, 20, 10, 0.9); 
+            --text-color: #f0f0f0;
+            --accent-main: #ff9f43; 
+            --accent-glow: rgba(255, 159, 67, 0.6);
+            --accent-hot: #e84118; 
+            --accent-red: #ff3300; 
+            --card-bg: rgba(35, 25, 20, 0.7); 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 0%, #302010 0%, #0f0900 70%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* THANH NGANG */
+        .top-bar {
+            width: 100%;
+            background: var(--top-bar-bg);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--accent-hot);
+            box-shadow: 0 5px 15px var(--accent-glow);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .logo-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, transparent, var(--accent-main), transparent 30%);
+            animation: spin 3s linear infinite;
+            z-index: 1;
+            filter: blur(3px);
+        }
+        
+        .logo-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-hot), transparent);
+            z-index: 2;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        .site-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+            margin: 0;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--accent-main), var(--accent-red), var(--accent-main));
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            filter: drop-shadow(0 0 8px rgba(255, 159, 67, 0.4));
+            animation: textGlowFlow 4s ease-in-out infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes textGlowFlow {
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
+        }
+
+        /* KHUNG THÔNG BÁO NỔI BẬT */
+        .alert-banner {
+            width: 92%;
+            max-width: 1000px;
+            margin: 30px auto 10px;
+            background: linear-gradient(135deg, rgba(232, 65, 24, 0.15), rgba(255, 159, 67, 0.1));
+            border: 1px solid rgba(232, 65, 24, 0.5);
+            border-radius: 15px;
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            box-shadow: 0 0 20px rgba(232, 65, 24, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: slideDown 0.6s ease-out, pulseAlert 2.5s infinite alternate;
+        }
+
+        .alert-banner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 5px; height: 100%;
+            background: var(--accent-hot);
+            box-shadow: 0 0 15px var(--accent-hot);
+        }
+
+        .alert-icon {
+            font-size: 2.8rem;
+            filter: drop-shadow(0 0 10px var(--accent-main));
+            animation: ringBell 2s infinite ease-in-out;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .alert-content {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .alert-content h3 {
+            color: var(--accent-main);
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .alert-content p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin-bottom: 12px;
+        }
+
+        .highlight-domain {
+            color: #fff;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--accent-hot), var(--accent-red));
+            padding: 2px 8px;
+            border-radius: 6px;
+            box-shadow: 0 2px 10px rgba(232, 65, 24, 0.5);
+            letter-spacing: 0.5px;
+        }
+
+        .alert-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent-hot), var(--accent-main));
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 28px;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(232, 65, 24, 0.4);
+            border: 1px solid rgba(255,255,255,0.2);
+            white-space: nowrap;
+        }
+
+        .alert-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 159, 67, 0.7);
+            background: linear-gradient(45deg, var(--accent-main), var(--accent-hot));
+        }
+
+        @keyframes pulseAlert {
+            0% { box-shadow: 0 0 15px rgba(232, 65, 24, 0.1); border-color: rgba(232, 65, 24, 0.3); }
+            100% { box-shadow: 0 0 30px rgba(232, 65, 24, 0.4); border-color: rgba(255, 159, 67, 0.8); }
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes ringBell {
+            0%, 100% { transform: rotate(0deg); }
+            10%, 30% { transform: rotate(15deg); }
+            20%, 40% { transform: rotate(-15deg); }
+            50% { transform: rotate(0deg); }
+        }
+
+        .site-subtitle {
+            font-size: 1rem;
+            color: var(--accent-main);
+            max-width: 90%;
+            margin: 20px auto 10px;
+            text-align: center;
+            line-height: 1.5;
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        /* ---------------------------------------------------
+           BỐ CỤC NỘI DUNG (CÁC THẺ CARD)
+           --------------------------------------------------- */
+        main {
+            width: 100%;
+            max-width: 1100px;
+            padding: 20px;
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+            flex-grow: 1;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 159, 67, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px var(--accent-glow);
+            border: 1px solid rgba(255, 159, 67, 0.3);
+        }
+
+        .card-img-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent-main);
+            overflow: hidden;
+            box-shadow: 0 0 15px var(--accent-glow);
+            padding: 2px;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .card h2 {
+            color: #fff;
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            line-height: 1.3;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #d0d0d0;
+            flex-grow: 1;
+        }
+
+        /* Nút Bấm Trong Card */
+        .card-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 30px;
+            background: transparent;
+            border: 1px solid var(--accent-main);
+            color: var(--accent-main);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .card-btn:hover {
+            background: var(--accent-main);
+            color: #000;
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: scale(1.05);
+        }
+
+        /* ---------------------------------------------------
+           CHÂN TRANG (FOOTER CHUYÊN NGHIỆP)
+           --------------------------------------------------- */
+        footer {
+            width: 100%;
+            background: rgba(15, 9, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 159, 67, 0.2);
+            padding: 25px 20px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+
+        footer .brand-name {
+            color: var(--accent-main);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* TINH CHỈNH ĐIỆN THOẠI */
+        @media (max-width: 768px) {
+            .alert-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px 20px;
+                gap: 15px;
+            }
+            .alert-content {
+                text-align: center;
+            }
+            .alert-btn {
+                margin-top: 10px;
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .site-title { font-size: 1.2rem; }
+            .logo-wrapper { width: 40px; height: 40px; }
+            .brand { gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Thanh menu bám dính -->
+    <nav class="top-bar">
+        <div class="brand">
+            <div class="logo-wrapper">
+                <img src="https://i.postimg.cc/Y9Qt45F7/2EE326B4-92D7-4B4E-B379-F336B91291C3.png" alt="ChuNhatPham Audio Logo" class="logo-img">
+            </div>
+            <h1 class="site-title">chunhatpham audio</h1>
+        </div>
+    </nav>
+
+    <!-- KHUNG THÔNG BÁO -->
+    <div class="alert-banner">
+        <div class="alert-icon">🔔</div>
+        <div class="alert-content">
+            <h3>Thông Báo Chuyển Tên Miền</h3>
+            <p>Chào mừng bạn đã đến với web xem phim và nghe audio hay tại kênh <strong>chunhatpham</strong>! Tên miền <em>chunhatpham.online</em> hiện đang bị chặn khiến người dùng phải Fake VPN gây khó chịu. Do đó, chúng tôi đã chính thức đổi tên miền thành <span class="highlight-domain">chunhatpham.fun</span>.</p>
+            <p style="margin-bottom: 0;">Bạn hãy tham gia xem phim tại tên miền mới nhé. Hoặc bấm nút tham gia ở bên cạnh/bên dưới nha!</p>
+        </div>
+        <a href="https://chunhatpham.fun" class="alert-btn" target="_blank">Tham Gia Ngay</a>
+    </div>
+
+    <p class="site-subtitle">Trải nghiệm âm thanh và không gian điện ảnh đỉnh cao</p>
+
+    <!-- KHU VỰC 3 THẺ NỘI DUNG -->
+    <main id="content-section">
+        
+        <!-- Mục 1: Web Phim -->
+        <div class="card">
+            <div class="card-img-wrapper">
+                <img src="https://i.postimg.cc/Y9Qt45F7/2EE326B4-92D7-4B4E-B379-F336B91291C3.png" alt="Logo Web">
+            </div>
+            <h2>chunhatpham.fun</h2>
+            <p>Web phim đã chuyển tên miền, anh em tham gia tại đây nhé.</p>
+            <a href="https://chunhatpham.fun" class="card-btn" target="_blank">Tham Gia</a>
+        </div>
+
+        <!-- Mục 2: Nhóm Truyện -->
+        <div class="card">
+            <div class="card-img-wrapper">
+                <img src="https://i.postimg.cc/dVSsgmvL/0C4CA49A-52A1-42BE-8D56-A0AD22F32C00.png" alt="Nhóm Truyện">
+            </div>
+            <h2>Nhóm Truyện</h2>
+            <p>Nhóm thông báo và cập nhật truyện phim nhanh nhất dành cho cộng đồng.</p>
+            <a href="https://t.me/nghechuyenla" class="card-btn" target="_blank">Tham Gia</a>
+        </div>
+
+        <!-- Mục 3: Liên Hệ -->
+        <div class="card">
+            <div class="card-img-wrapper">
+                <img src="https://i.postimg.cc/Cx6h9HYF/A292A3C8-125D-4BF9-B965-77F735C7DDC8.png" alt="Liên Hệ">
+            </div>
+            <h2>Liên Hệ</h2>
+            <p>Tài khoản hỗ trợ của admin, giải đáp và xử lý mọi vấn đề nhanh chóng.</p>
+            <a href="https://t.me/nhatpham27" class="card-btn" target="_blank">Liên Hệ Admin</a>
+        </div>
+    </main>
+
+    <!-- CHÂN TRANG -->
+    <footer>
+        <p>&copy; 2026 <span class="brand-name">ChuNhatPham Audio</span>. All rights reserved.</p>
+        <p>Hệ thống giải trí phim & truyện tranh đa nền tảng.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                    card.style.transition = 'all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)';
+                }, 150 * (index + 1));
+            });
+        });
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                .then(registration => {
+                    console.log('Đã đăng ký Service Worker thành công!');
+                })
+                .catch(error => {
+                    console.log('Đăng ký Service Worker thất bại:', error);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
